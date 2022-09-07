@@ -1,9 +1,9 @@
 import React from "react";
 import Image from "next/image";
 import { PlusIcon, EllipsisVerticalIcon } from "@heroicons/react/24/solid";
-function Navbar() {
+function Navbar({ handleOpen }) {
   return (
-    <header className="block bg-white px-4 py-5 shadow-sm md:hidden">
+    <header className="block bg-white px-4 py-5 shadow-sm border border-gray-50  md:hidden">
       <nav className="flex justify-between items-center">
         <div className="flex items-center space-x-4">
           <div className="w-6 min-h-[25px] relative cursor-pointer">
@@ -29,7 +29,10 @@ function Navbar() {
           </div>
         </div>
         <div className="flex items-center space-x-4">
-          <button className="bg-lightPurple/50 px-[18px] py-[10px] rounded-full">
+          <button
+            className="btn bg-lightPurple/50 px-[18px] py-[10px]"
+            onClick={() => handleOpen(true)}
+          >
             <PlusIcon className="w-6 h-6 text-white" />
           </button>
           <div className="w-6 h-6 relative cursor-pointer">

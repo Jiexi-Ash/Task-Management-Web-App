@@ -3,7 +3,7 @@ import Image from "next/image";
 import NavItem from "./NavItem";
 import BoardsData from "data";
 
-function SideNav() {
+function SideNav({ handleOpen }) {
   const [selectedIndex, setSelectedIndex] = useState(0);
 
   const handleSelect = (index) => {
@@ -23,14 +23,17 @@ function SideNav() {
         <ul className="flex flex-col pt-8 space-y-3">
           {BoardsData.boards.map((board, index) => (
             <NavItem
-              key={board.id}
+              key={board.name}
               board={board}
               index={index}
               selectedIndex={selectedIndex}
               onSelect={handleSelect}
             />
           ))}
-          <li className=" flex space-x-4  py-[14px] px-[26px] rounded-r-full items-center">
+          <li
+            className=" flex space-x-4  py-[14px] px-[26px] rounded-r-full items-center cursor-pointer"
+            onClick={() => handleOpen(true)}
+          >
             <svg
               width="16"
               height="16"
