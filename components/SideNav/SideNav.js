@@ -10,7 +10,7 @@ function SideNav({ handleOpen }) {
     setSelectedIndex(index);
   };
   return (
-    <div className="hidden  shadow-sm pr-5 border border-gray-50 lg:w-[300px]  bg-white md:block">
+    <div className="hidden  shadow-sm pr-5 border border-gray-50 lg:w-[300px]  bg-white md:flex md:flex-col">
       <div className="flex items-center space-x-0 py-8 px-[26px]">
         <div className="relative w-40 h-7">
           <Image src="/images/logo-dark.svg" layout="fill" alt="Kanban Logo" />

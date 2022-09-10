@@ -70,6 +70,23 @@ export const signInUser = createAsyncThunk(
   }
 );
 
+export const autoSignIn = createAsyncThunk(
+  "auth/autoSignIn",
+  async ({ router }, { dispatch }) => {
+    try {
+      const user = await axios.get("/api/users/user");
+      router.push("/");
+      return {
+        id: user.data._id,
+        email: user.data.email,
+      };
+    } catch (err) {
+      console.log(err);
+      throw err;
+    }
+  }
+);
+
 const authSlice = createSlice({
   name: "auth",
   initialState,
@@ -90,6 +107,17 @@ const authSlice = createSlice({
       state.loading = true;
     },
     [signInUser.fulfilled]: (state, action) => {
+      state.user = action.payload;
+      state.loading = false;
+      state.authenticated = true;
+    },
+    [signInUser.rejected]: (state, action) => {
+      state.loading = false;
+    },
+    [autoSignIn.pending]: (state, action) => {
+      state.loading = true;
+    },
+    [autoSignIn.fulfilled]: (state, action) => {
       state.user = action.payload;
       state.loading = false;
       state.authenticated = true;
