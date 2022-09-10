@@ -4,7 +4,7 @@ function BoardColumn({ handleChange, removeColumn, index, column }) {
   const [value, setValue] = useState(column);
 
   const handleInputChange = (e) => {
-    setValue({ boardName: e.target.value });
+    setValue({ name: e.target.value });
   };
   const handleFocus = (e) => {
     handleChange(value, index);
@@ -22,7 +22,7 @@ function BoardColumn({ handleChange, removeColumn, index, column }) {
         type="text"
         placeholder="Column Name"
         onChange={handleInputChange}
-        value={value.boardName}
+        value={value.name}
         onBlur={handleFocus}
       />
       <svg

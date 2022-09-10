@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import Modal from "react-modal";
 import BoardColumn from "./BoardColumn";
+import { useDispatch } from "react-redux";
+import { createBoard } from "redux/reducers/boardSlice";
 
 const customStyles = {
   content: {
@@ -18,12 +20,16 @@ const customStyles = {
 };
 
 Modal.setAppElement("#react-modal");
+
 function AddBoard({ isOpen, handleOpen }) {
+  const dispatch = useDispatch();
   const [columns, setColumns] = useState([]);
+  const [boardName, setBoardName] = useState("");
 
   const handleAddColumn = (e) => {
     e.preventDefault();
-    setColumns([...columns, { boardName: "" }]);
+    setColumns([...columns, { name: "" }]);
+    console.log(columns);
   };
 
   const removeColumn = (index) => {
@@ -40,6 +46,7 @@ function AddBoard({ isOpen, handleOpen }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    dispatch(createBoard({ boardName, boardColumns: columns }));
   };
 
   const getColumns = () => {
@@ -53,9 +60,9 @@ function AddBoard({ isOpen, handleOpen }) {
       />
     ));
   };
-  useEffect(() => {
-    getColumns();
-  }, [columns]);
+  // useEffect(() => {
+  //   getColumns();
+  // }, [columns]);
 
   return (
     <>
@@ -82,6 +89,8 @@ function AddBoard({ isOpen, handleOpen }) {
                   id="username"
                   type="text"
                   placeholder="e.g web Design"
+                  onChange={(e) => setBoardName(e.target.value)}
+                  value={boardName}
                 />
               </div>
               <div className="mb-2">

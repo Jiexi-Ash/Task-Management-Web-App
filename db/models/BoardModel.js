@@ -1,17 +1,30 @@
 import mongoose from "mongoose";
 
+const taskSchema = new mongoose.Schema({
+  title: {
+    type: String,
+    required: true,
+  },
+  description: {
+    type: String,
+    required: true,
+  },
+  board: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Board",
+  },
+  column: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Column",
+  },
+});
+
 const boardColumnSchema = new mongoose.Schema({
   name: {
     type: String,
     required: true,
   },
-  // tasks
-  tasks: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Task",
-    },
-  ],
+  tasks: [taskSchema],
 });
 
 const BoardSchema = new mongoose.Schema(
@@ -21,6 +34,12 @@ const BoardSchema = new mongoose.Schema(
       required: true,
     },
     boardColumns: [boardColumnSchema],
+    userID: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+    },
+    // tasks
+    tasks: [taskSchema],
   },
   {
     timestamps: true,

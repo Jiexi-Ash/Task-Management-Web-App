@@ -9,6 +9,7 @@ function SideNav({ handleOpen }) {
   const handleSelect = (index) => {
     setSelectedIndex(index);
   };
+
   return (
     <div className="hidden  shadow-sm pr-5 border border-gray-50 lg:w-[300px]  bg-white md:flex md:flex-col">
       <div className="flex items-center space-x-0 py-8 px-[26px]">

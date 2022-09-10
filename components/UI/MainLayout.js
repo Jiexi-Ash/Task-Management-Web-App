@@ -4,7 +4,8 @@ import Navbar from "components/Navbar/Navbar";
 import SideNav from "components/SideNav/SideNav";
 import AddBoard from "components/Board/AddBoard";
 
-function MainLayout({ children }) {
+function MainLayout({ children, boards }) {
+  console.log(boards);
   const [isOpen, setIsOpen] = useState(false);
 
   const handleModal = (bool) => {

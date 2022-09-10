@@ -1,7 +1,15 @@
-import React from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import { PlusIcon, EllipsisVerticalIcon } from "@heroicons/react/24/solid";
+import { useSelector } from "react-redux";
+
 function Navbar({ handleOpen }) {
+  const [selectedBoard, setSelectedBoard] = useState(null);
+  const boards = useSelector((state) => state.board.boards);
+
+  useEffect(() => {
+    console.log(boards);
+  }, [boards]);
   return (
     <header className="block bg-white px-4 py-5 shadow-sm border border-gray-50  md:hidden">
       <nav className="flex justify-between items-center">
@@ -15,9 +23,9 @@ function Navbar({ handleOpen }) {
             />
           </div>
           <div className="flex items-center space-x-2">
-            <span className="font-bold text-[12px] font-PlusJakartaSans">
+            <button className="font-bold text-[12px] font-PlusJakartaSans">
               Platform Launch
-            </span>
+            </button>
             <svg width="10" height="7" xmlns="http://www.w3.org/2000/svg">
               <path
                 stroke="#635FC7"
