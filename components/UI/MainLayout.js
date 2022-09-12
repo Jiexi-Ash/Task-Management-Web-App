@@ -3,14 +3,24 @@ import Head from "next/head";
 import Navbar from "components/Navbar/Navbar";
 import SideNav from "components/SideNav/SideNav";
 import AddBoard from "components/Board/AddBoard";
+import NavModal from "components/Navbar/NavModal";
+import { useSelector } from "react-redux";
 
-function MainLayout({ children, boards }) {
-  console.log(boards);
+function MainLayout({ children }) {
+  const boards = useSelector((state) => state.board.board);
+  console.log("render");
   const [isOpen, setIsOpen] = useState(false);
+  const [isNavOpen, setIsModalOpen] = useState(false);
 
-  const handleModal = (bool) => {
+  const handleNavModal = () => {
+    setIsModalOpen(!isNavOpen);
+  };
+
+  const handleAddBoardModal = (bool) => {
+    console.log("navbar btn");
     setIsOpen(bool);
   };
+
   return (
     <>
       <Head>
@@ -19,12 +29,24 @@ function MainLayout({ children, boards }) {
         <link rel="icon" href="/images/favicon-32x32.png" />
       </Head>
 
-      <Navbar handleOpen={handleModal} />
-      <main>
-        <AddBoard handleOpen={handleModal} isOpen={isOpen} />
-        <div className="flex  space-x-[2px]">
-          <SideNav handleOpen={handleModal} />
-          <div className="grow min-h-screen">{children}</div>
+      <Navbar
+        handleAddBoard={handleAddBoardModal}
+        handleNavModal={handleNavModal}
+        isNavOpen={isNavOpen}
+      />
+      <>
+        <AddBoard handleAddBoardModal={handleAddBoardModal} isOpen={isOpen} />
+        <NavModal
+          isNavOpen={isNavOpen}
+          handleNavModal={handleNavModal}
+          boards={boards}
+          handleAddBoardModal={handleAddBoardModal}
+        />
+      </>
+      <main className="">
+        <div className="relative flex   space-x-[2px] min-h-screen">
+          <SideNav handleAddBoardModal={handleAddBoardModal} />
+          <div className="flex-1">{children}</div>
         </div>
       </main>
     </>

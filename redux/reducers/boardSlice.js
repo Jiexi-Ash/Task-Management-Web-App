@@ -4,6 +4,7 @@ import axios from "axios";
 const initialState = {
   board: [],
   loading: false,
+  selectedBoard: null,
 };
 
 export const createBoard = createAsyncThunk(
@@ -38,7 +39,14 @@ export const getBoards = createAsyncThunk(
 const boardSlice = createSlice({
   name: "board",
   initialState,
-  reducers: {},
+  reducers: {
+    setUserBoards(state, action) {
+      state.board = action.payload;
+    },
+    setSelectedBoard(state, action) {
+      state.selectedBoard = action.payload;
+    },
+  },
   extraReducers: {
     [createBoard.pending]: (state, action) => {
       state.loading = true;
@@ -52,5 +60,7 @@ const boardSlice = createSlice({
     },
   },
 });
+
+export const { setUserBoards, setSelectedBoard } = boardSlice.actions;
 
 export default boardSlice.reducer;

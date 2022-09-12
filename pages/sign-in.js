@@ -51,7 +51,7 @@ function Login() {
   return (
     <div className="flex justify-center items-center h-screen">
       {!hasSession ? (
-        <div className="w-full max-w-sm bg-white px-6 py-8 border border-gray-100 shadow-sm rounded-md">
+        <div className="max-w-sm bg-white px-6 py-8 border border-gray-100 shadow-sm rounded-md">
           <h1 className="text-[24px] font-bold lg:text-2xl text-center font-PlusJakartaSans">
             {hasAccount ? "Sign In" : "Sign Up"}
           </h1>

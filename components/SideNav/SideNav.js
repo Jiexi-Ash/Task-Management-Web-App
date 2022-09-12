@@ -2,38 +2,48 @@ import { useState } from "react";
 import Image from "next/image";
 import NavItem from "./NavItem";
 import BoardsData from "data";
+import { useSelector, useDispatch } from "react-redux";
+import { setSelectedBoard } from "redux/reducers/boardSlice";
 
-function SideNav({ handleOpen }) {
+function SideNav({ handleAddBoardModal }) {
+  const dispatch = useDispatch();
+  const boards = useSelector((state) => state.board.board);
+
   const [selectedIndex, setSelectedIndex] = useState(0);
 
   const handleSelect = (index) => {
     setSelectedIndex(index);
   };
 
+  const handleSelectBoard = (board, index) => {
+    setSelectedIndex(index);
+    dispatch(setSelectedBoard(board));
+  };
+
   return (
-    <div className="hidden  shadow-sm pr-5 border border-gray-50 lg:w-[300px]  bg-white md:flex md:flex-col">
-      <div className="flex items-center space-x-0 py-8 px-[26px]">
+    <div className="absolute inset-y-0 left-0 -translate-x-full transition duration-200 ease-in-out shadow-sm pr-5 border border-gray-50 w-[300px]  bg-white  md:relative md:translate-x-0">
+      <div className="py-8 px-[26px]">
         <div className="relative w-40 h-7">
           <Image src="/images/logo-dark.svg" layout="fill" alt="Kanban Logo" />
         </div>
       </div>
       <div className="py-[52px]">
         <p className="uppercase font-bold text-paleGrey tracking-[2.4px] text-[12px] px-[26px]">
-          all boards <span>({BoardsData.boards.length})</span>
+          all boards <span>({boards.length})</span>
         </p>
         <ul className="flex flex-col pt-8 space-y-3">
-          {BoardsData.boards.map((board, index) => (
+          {boards.map((board, index) => (
             <NavItem
-              key={board.name}
+              key={board._id}
               board={board}
               index={index}
               selectedIndex={selectedIndex}
-              onSelect={handleSelect}
+              onSelect={handleSelectBoard}
             />
           ))}
           <li
             className=" flex space-x-4  py-[14px] px-[26px] rounded-r-full items-center cursor-pointer"
-            onClick={() => handleOpen(true)}
+            onClick={() => handleAddBoardModal(true)}
           >
             <svg
               width="16"

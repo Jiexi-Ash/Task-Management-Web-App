@@ -21,7 +21,7 @@ const customStyles = {
 
 Modal.setAppElement("#react-modal");
 
-function AddBoard({ isOpen, handleOpen }) {
+function AddBoard({ isOpen, handleAddBoardModal }) {
   const dispatch = useDispatch();
   const [columns, setColumns] = useState([]);
   const [boardName, setBoardName] = useState("");
@@ -69,10 +69,10 @@ function AddBoard({ isOpen, handleOpen }) {
       <Modal
         isOpen={isOpen}
         style={customStyles}
-        onRequestClose={() => handleOpen(false)}
+        onRequestClose={() => handleAddBoardModal(false)}
       >
         <div className="flex justify-center items-center h-full">
-          <div className="w-full max-w-[480px] p-4">
+          <div className="max-w-[480px] p-4">
             <h3 className="capitalize font-bold text-[18px] text-primaryBlack">
               add new board
             </h3>

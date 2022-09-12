@@ -2,7 +2,7 @@ import React from "react";
 
 function NavItem({ board, index, selectedIndex, onSelect }) {
   const handleSelect = () => {
-    onSelect(index);
+    onSelect(board, index);
   };
   return (
     <li
@@ -26,7 +26,7 @@ function NavItem({ board, index, selectedIndex, onSelect }) {
           selectedIndex === index ? "text-white " : "text-paleGrey "
         } font-bold text-[15px] leading-[19px]`}
       >
-        {board.name}
+        {board.boardName}
       </span>
     </li>
   );

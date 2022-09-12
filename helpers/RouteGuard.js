@@ -33,7 +33,9 @@ function RouteGuard({ children }) {
 
   if (loading) {
     return (
-      <Loader size="large" align="center" position="center" color="primary" />
+      <div className="flex justify-center items-center h-screen">
+        <Loader size="large" align="center" position="center" color="primary" />
+      </div>
     );
   }
 
