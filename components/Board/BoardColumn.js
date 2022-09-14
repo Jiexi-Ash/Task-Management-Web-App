@@ -1,40 +1,21 @@
-import { useState } from "react";
+import React from "react";
+import Task from "./Task";
 
-function BoardColumn({ handleChange, removeColumn, index, column }) {
-  const [value, setValue] = useState(column);
-
-  const handleInputChange = (e) => {
-    setValue({ name: e.target.value });
-  };
-  const handleFocus = (e) => {
-    handleChange(value, index);
-  };
-
-  const handleRemove = () => {
-    removeColumn(index);
-  };
-
+function BoardColumn({ column }) {
   return (
-    <div className="flex items-center space-x-4">
-      <input
-        className="appearance-none border border-gray-200 rounded w-full py-2 px-3 my-2  leading-tight focus:ring-0 focus:border-paleGrey placeholder:text-gray-300  placeholder:text-sm"
-        id="username"
-        type="text"
-        placeholder="Column Name"
-        onChange={handleInputChange}
-        value={value.name}
-        onBlur={handleFocus}
-      />
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        className="w-4 h-4 cursor-pointer"
-        onClick={handleRemove}
-      >
-        <g fill="#828FA3" fillRule="evenodd">
-          <path d="m12.728 0 2.122 2.122L2.122 14.85 0 12.728z" />
-          <path d="M0 2.122 2.122 0 14.85 12.728l-2.122 2.122z" />
-        </g>
-      </svg>
+    <div className="mt-6 px-4 flex-shrink-0 pb-6">
+      <div className="flex items-center space-x-2 ">
+        <div className="w-5 h-5 rounded-full bg-[#49C4E5]"></div>
+        <h2 className="text-paleGrey font-bold uppercase text-[12px]">
+          {column?.name}
+          <span> ({column?.tasks.length})</span>
+        </h2>
+      </div>
+      <div className="flex flex-col space-y-6 mt-6">
+        {column?.tasks.map((task) => (
+          <Task key={task._id} task={task} />
+        ))}
+      </div>
     </div>
   );
 }

@@ -46,6 +46,13 @@ const boardSlice = createSlice({
     setSelectedBoard(state, action) {
       state.selectedBoard = action.payload;
     },
+    updateBoardColumn(state, action) {
+      const column = state.selectedBoard.columns.find(
+        (column) => column._id === action.payload._id
+      );
+
+      column.tasks = action.payload.tasks;
+    },
   },
   extraReducers: {
     [createBoard.pending]: (state, action) => {
@@ -61,6 +68,7 @@ const boardSlice = createSlice({
   },
 });
 
-export const { setUserBoards, setSelectedBoard } = boardSlice.actions;
+export const { setUserBoards, setSelectedBoard, updateBoardColumn } =
+  boardSlice.actions;
 
 export default boardSlice.reducer;

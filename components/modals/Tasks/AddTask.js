@@ -2,7 +2,8 @@ import { useState, useEffect } from "react";
 import Modal from "react-modal";
 import SubTask from "./SubTask";
 import axios from "axios";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { updateBoardColumn } from "redux/reducers/boardSlice";
 
 Modal.setAppElement("#react-modal");
 
@@ -23,6 +24,7 @@ const customStyles = {
 };
 
 function AddTask({ isTask, handleTask, boards = [] }) {
+  const dispatch = useDispatch();
   const selectedBoard = useSelector((state) => state.board.selectedBoard);
   const [taskTitle, setTaskTitle] = useState("");
   const [taskDescription, setTaskDescription] = useState("");
@@ -70,8 +72,14 @@ function AddTask({ isTask, handleTask, boards = [] }) {
       .patch("/api/tasks/addTask", taskData)
       .then((res) => {
         console.log(res);
+        dispatch(updateBoardColumn(res.data));
       })
-      .catch((err) => {});
+      .catch((err) => {
+        console.log(err);
+      })
+      .then(() => {
+        handleTask(false);
+      });
   };
 
   return (

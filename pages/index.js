@@ -8,11 +8,11 @@ import { findUserByEmail } from "db/services/user.services";
 import connectDB from "db/connectDB";
 import { setUserBoards, setSelectedBoard } from "redux/reducers/boardSlice";
 import { useDispatch } from "react-redux";
+import DisplayBoard from "components/Board/DisplayBoard";
 
 export default function Home({ boards }) {
   console.log("render home");
   const dispatch = useDispatch();
-
   useEffect(() => {
     if (boards) {
       dispatch(setUserBoards(boards));
@@ -23,14 +23,20 @@ export default function Home({ boards }) {
     <>
       {" "}
       <MainLayout boards={boards}>
-        <div className="flex h-full items-center justify-center">
-          <div className="text-center">
-            <h2 className="text-[18px] mb-6 font-bold leading-5 text-paleGrey text-center max-w-[350px] md:max-w-[460] lg:max-w-[500px] transition-all duration-200">
-              This board is empty. Create a new column to get started.
-            </h2>
-            <button className="btn bg-primaryPurple">+ add new task</button>
+        {!boards ? (
+          <div className="flex h-full items-center justify-center">
+            <div className="text-center">
+              <h2 className="text-[18px] mb-6 font-bold leading-5 text-paleGrey text-center max-w-[350px] md:max-w-[460] lg:max-w-[500px] transition-all duration-200">
+                This board is empty. Create a new column to get started.
+              </h2>
+              <button className="btn bg-primaryPurple">+ add new task</button>
+            </div>
           </div>
-        </div>
+        ) : (
+          <div className="w-screen">
+            <DisplayBoard />
+          </div>
+        )}
       </MainLayout>
     </>
   );

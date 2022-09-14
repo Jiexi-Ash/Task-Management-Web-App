@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import Modal from "react-modal";
-import BoardColumn from "./BoardColumn";
+import InputColumn from "./InputColumn";
 import { useDispatch } from "react-redux";
 import { createBoard } from "redux/reducers/boardSlice";
 
@@ -54,7 +54,7 @@ function AddBoard({ isOpen, handleAddBoardModal }) {
 
   const getColumns = () => {
     return columns.map((column, index) => (
-      <BoardColumn
+      <InputColumn
         handleChange={handleChange}
         removeColumn={removeColumn}
         index={index}

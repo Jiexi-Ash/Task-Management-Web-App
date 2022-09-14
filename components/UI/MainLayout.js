@@ -58,7 +58,7 @@ function MainLayout({ children }) {
         />
       </>
       <main className="">
-        <div className="relative flex   space-x-[2px] min-h-screen">
+        <div className="relative flex  space-x-[2px] min-h-screen">
           <SideNav handleAddBoardModal={handleAddBoardModal} />
           <div className="flex-1">
             <HeaderHome handleTask={handleAddTaskModal} />
