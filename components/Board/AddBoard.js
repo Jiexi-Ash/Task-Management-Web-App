@@ -23,9 +23,11 @@ Modal.setAppElement("#react-modal");
 
 function AddBoard({ isOpen, handleAddBoardModal }) {
   const dispatch = useDispatch();
+
   const [columns, setColumns] = useState([]);
   const [boardName, setBoardName] = useState("");
 
+  console.log(columns);
   const handleAddColumn = (e) => {
     e.preventDefault();
     setColumns([...columns, { name: "" }]);
@@ -46,7 +48,8 @@ function AddBoard({ isOpen, handleAddBoardModal }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(createBoard({ boardName, boardColumns: columns }));
+
+    dispatch(createBoard({ name: boardName, columns: columns }));
   };
 
   const getColumns = () => {
@@ -60,9 +63,6 @@ function AddBoard({ isOpen, handleAddBoardModal }) {
       />
     ));
   };
-  // useEffect(() => {
-  //   getColumns();
-  // }, [columns]);
 
   return (
     <>
@@ -71,8 +71,8 @@ function AddBoard({ isOpen, handleAddBoardModal }) {
         style={customStyles}
         onRequestClose={() => handleAddBoardModal(false)}
       >
-        <div className="flex justify-center items-center h-full">
-          <div className="max-w-[480px] p-4">
+        <div className="flex justify-center items-center">
+          <div className=" p-4">
             <h3 className="capitalize font-bold text-[18px] text-primaryBlack">
               add new board
             </h3>

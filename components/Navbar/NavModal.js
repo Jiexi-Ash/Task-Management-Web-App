@@ -50,15 +50,16 @@ function NavModal({
             </h2>
             <div className="mr-6">
               <ul className="flex flex-col space-y-2 ">
-                {boards.map((board, index) => (
-                  <NavItem
-                    board={board}
-                    key={board._id}
-                    onSelect={handleSelectBoard}
-                    index={index}
-                    selectedIndex={selectedIndex}
-                  />
-                ))}
+                {boards &&
+                  boards.map((board, index) => (
+                    <NavItem
+                      board={board}
+                      key={board._id}
+                      onSelect={handleSelectBoard}
+                      index={index}
+                      selectedIndex={selectedIndex}
+                    />
+                  ))}
                 <li
                   className="px-6 py-2 cursor-pointer"
                   onClick={() => handleModals()}

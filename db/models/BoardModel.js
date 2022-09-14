@@ -1,5 +1,17 @@
 import mongoose from "mongoose";
 
+const subTaskSchema = new mongoose.Schema({
+  title: {
+    type: String,
+    required: true,
+  },
+  isCompleted: {
+    type: Boolean,
+    required: true,
+    default: false,
+  },
+});
+
 const taskSchema = new mongoose.Schema({
   title: {
     type: String,
@@ -7,19 +19,15 @@ const taskSchema = new mongoose.Schema({
   },
   description: {
     type: String,
+  },
+  status: {
+    type: String,
     required: true,
   },
-  board: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Board",
-  },
-  column: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Column",
-  },
+  subTasks: [subTaskSchema],
 });
 
-const boardColumnSchema = new mongoose.Schema({
+const columnSchema = new mongoose.Schema({
   name: {
     type: String,
     required: true,
@@ -29,21 +37,21 @@ const boardColumnSchema = new mongoose.Schema({
 
 const BoardSchema = new mongoose.Schema(
   {
-    boardName: {
+    name: {
       type: String,
       required: true,
     },
-    boardColumns: [boardColumnSchema],
+    columns: [columnSchema],
     userID: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
     },
-    // tasks
-    tasks: [taskSchema],
   },
   {
     timestamps: true,
   }
 );
 
-export default mongoose.models.Board || mongoose.model("Board", BoardSchema);
+const Board = mongoose.models.Board || mongoose.model("Board", BoardSchema);
+
+export default Board;

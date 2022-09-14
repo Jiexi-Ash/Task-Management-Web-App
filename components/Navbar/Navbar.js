@@ -4,7 +4,13 @@ import { PlusIcon, EllipsisVerticalIcon } from "@heroicons/react/24/solid";
 import { useSelector } from "react-redux";
 import NavModal from "./NavModal";
 
-function Navbar({ handleAddBoard, handleNavModal, isNavOpen }) {
+function Navbar({
+  handleAddBoard,
+  handleNavModal,
+  isNavOpen,
+  isTask,
+  handleTask,
+}) {
   const [isOpen, setIsOpen] = useState(false);
   const selectedBoard = useSelector((state) => state.board.selectedBoard);
   const boards = useSelector((state) => state.board.board);
@@ -27,7 +33,7 @@ function Navbar({ handleAddBoard, handleNavModal, isNavOpen }) {
               onClick={() => handleNavModal()}
             >
               <span className="font-bold text-[18px]">
-                {selectedBoard ? selectedBoard.boardName : ""}
+                {selectedBoard ? selectedBoard.name : ""}
               </span>
               <>
                 {isNavOpen ? (
@@ -54,7 +60,10 @@ function Navbar({ handleAddBoard, handleNavModal, isNavOpen }) {
           </div>
         </div>
         <div className="flex items-center space-x-4">
-          <button className="btn bg-lightPurple/50 px-[10px] py-[4px]">
+          <button
+            className="btn bg-lightPurple/50 px-[10px] py-[4px]"
+            onClick={() => handleTask(true)}
+          >
             <PlusIcon className="w-6 h-6 text-white" />
           </button>
           <div className="w-6 h-6 relative cursor-pointer">

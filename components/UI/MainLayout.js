@@ -5,12 +5,15 @@ import SideNav from "components/SideNav/SideNav";
 import AddBoard from "components/Board/AddBoard";
 import NavModal from "components/Navbar/NavModal";
 import { useSelector } from "react-redux";
+import AddTask from "components/modals/Tasks/AddTask";
+import HeaderHome from "components/Home/HeaderHome";
 
 function MainLayout({ children }) {
   const boards = useSelector((state) => state.board.board);
   console.log("render");
   const [isOpen, setIsOpen] = useState(false);
   const [isNavOpen, setIsModalOpen] = useState(false);
+  const [isTask, setIsTask] = useState(false);
 
   const handleNavModal = () => {
     setIsModalOpen(!isNavOpen);
@@ -19,6 +22,10 @@ function MainLayout({ children }) {
   const handleAddBoardModal = (bool) => {
     console.log("navbar btn");
     setIsOpen(bool);
+  };
+
+  const handleAddTaskModal = (bool) => {
+    setIsTask(bool);
   };
 
   return (
@@ -33,6 +40,8 @@ function MainLayout({ children }) {
         handleAddBoard={handleAddBoardModal}
         handleNavModal={handleNavModal}
         isNavOpen={isNavOpen}
+        isTask={isTask}
+        handleTask={handleAddTaskModal}
       />
       <>
         <AddBoard handleAddBoardModal={handleAddBoardModal} isOpen={isOpen} />
@@ -42,11 +51,19 @@ function MainLayout({ children }) {
           boards={boards}
           handleAddBoardModal={handleAddBoardModal}
         />
+        <AddTask
+          isTask={isTask}
+          handleTask={handleAddTaskModal}
+          boards={boards}
+        />
       </>
       <main className="">
         <div className="relative flex   space-x-[2px] min-h-screen">
           <SideNav handleAddBoardModal={handleAddBoardModal} />
-          <div className="flex-1">{children}</div>
+          <div className="flex-1">
+            <HeaderHome handleTask={handleAddTaskModal} />
+            {children}
+          </div>
         </div>
       </main>
     </>

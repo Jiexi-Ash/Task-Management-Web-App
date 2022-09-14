@@ -23,7 +23,6 @@ export default function Home({ boards }) {
     <>
       {" "}
       <MainLayout boards={boards}>
-        <HeaderHome />
         <div className="flex h-full items-center justify-center">
           <div className="text-center">
             <h2 className="text-[18px] mb-6 font-bold leading-5 text-paleGrey text-center max-w-[350px] md:max-w-[460] lg:max-w-[500px] transition-all duration-200">

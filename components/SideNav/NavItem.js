@@ -26,7 +26,7 @@ function NavItem({ board, index, selectedIndex, onSelect }) {
           selectedIndex === index ? "text-white " : "text-paleGrey "
         } font-bold text-[15px] leading-[19px]`}
       >
-        {board.boardName}
+        {board.name}
       </span>
     </li>
   );

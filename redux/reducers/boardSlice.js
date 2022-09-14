@@ -9,12 +9,12 @@ const initialState = {
 
 export const createBoard = createAsyncThunk(
   "board/createBoard",
-  async ({ boardName, boardColumns }, { dispatch }) => {
+  async ({ name, columns }, { dispatch }) => {
     try {
-      console.log({ boardName, boardColumns });
-      const board = await axios.post("/api/boards/create", {
-        boardName,
-        boardColumns,
+      console.log({ name, columns });
+      const board = await axios.patch("/api/boards/create", {
+        name,
+        columns,
       });
 
       console.log(board);

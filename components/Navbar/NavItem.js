@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-function NavItem({ board, index, selectedIndex, onSelect }) {
+function NavItem({ board = {}, index, selectedIndex, onSelect }) {
   return (
     <li
       onClick={() => onSelect(board, index)}
@@ -24,7 +24,7 @@ function NavItem({ board, index, selectedIndex, onSelect }) {
             selectedIndex === index ? "text-white" : "text-paleGrey"
           }`}
         >
-          {board.boardName}
+          {board.name}
         </span>
       </div>
     </li>
