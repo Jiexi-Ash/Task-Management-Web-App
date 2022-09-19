@@ -54,7 +54,7 @@ function NavModal({
                   boards.map((board, index) => (
                     <NavItem
                       board={board}
-                      key={board._id}
+                      key={board?._id}
                       onSelect={handleSelectBoard}
                       index={index}
                       selectedIndex={selectedIndex}

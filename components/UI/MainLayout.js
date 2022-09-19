@@ -7,6 +7,7 @@ import NavModal from "components/Navbar/NavModal";
 import { useSelector } from "react-redux";
 import AddTask from "components/modals/Tasks/AddTask";
 import HeaderHome from "components/Home/HeaderHome";
+import DeleteBoard from "components/modals/DeleteBoard";
 
 function MainLayout({ children }) {
   const boards = useSelector((state) => state.board.board);
@@ -14,7 +15,7 @@ function MainLayout({ children }) {
   const [isOpen, setIsOpen] = useState(false);
   const [isNavOpen, setIsModalOpen] = useState(false);
   const [isTask, setIsTask] = useState(false);
-
+  const [isDeleteBoard, setIsDeleteBoard] = useState(false);
   const handleNavModal = () => {
     setIsModalOpen(!isNavOpen);
   };
@@ -26,6 +27,9 @@ function MainLayout({ children }) {
 
   const handleAddTaskModal = (bool) => {
     setIsTask(bool);
+  };
+  const handleDeleteBoardModal = (bool) => {
+    setIsDeleteBoard(bool);
   };
 
   return (
@@ -56,12 +60,19 @@ function MainLayout({ children }) {
           handleTask={handleAddTaskModal}
           boards={boards}
         />
+        <DeleteBoard
+          handleDelete={handleDeleteBoardModal}
+          isDelete={isDeleteBoard}
+        />
       </>
-      <main className="">
+      <main className="overflow-auto">
         <div className="relative flex  space-x-[2px] min-h-screen">
           <SideNav handleAddBoardModal={handleAddBoardModal} />
-          <div className="flex-1">
-            <HeaderHome handleTask={handleAddTaskModal} />
+          <div className="flex-grow overflow-x-auto">
+            <HeaderHome
+              handleTask={handleAddTaskModal}
+              handleDelete={handleDeleteBoardModal}
+            />
             {children}
           </div>
         </div>

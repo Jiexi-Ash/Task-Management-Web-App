@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700&display=swap");
+
 @layer base {
   body {
     @apply bg-lightishGrey2 font-PlusJakartaSans;
@@ -13,5 +15,3 @@
     @apply py-2 px-6 md:py-[15px] capitalize font-bold text-white rounded-full  hover:bg-lightPurple text-sm transition-all duration-200;
   }
 }
-
-@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700&display=swap");

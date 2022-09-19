@@ -10,14 +10,14 @@ function DisplayBoard() {
   console.log(board);
 
   return (
-    <div className="flex overflow-x-auto w-full">
+    <div className="flex w-full overflow-auto">
       {selectedBoard?.columns.map(
         (column) => (
           console.log(column),
           (<BoardColumn key={column._id} column={column} />)
         )
       )}
-      <div className="mt-6 px-4 flex-shrink-0 pb-6 flex justify-center items-center w-[300px] bg-gradient-to-b from-[#E9EFFA] to-[#E9EFFA]/50 rounded-md">
+      <div className="mt-16 mb-6 px-4 flex-shrink-0  flex justify-center items-center w-[300px] bg-gradient-to-b from-[#E9EFFA] to-[#E9EFFA]/50 rounded-md  ">
         <button className="text-2xl hover:text-primaryPurple transition-all duration-200 ease-in">
           + new column
         </button>

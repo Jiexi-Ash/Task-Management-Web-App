@@ -33,9 +33,7 @@ export default function Home({ boards }) {
             </div>
           </div>
         ) : (
-          <div className="w-screen">
-            <DisplayBoard />
-          </div>
+          <DisplayBoard />
         )}
       </MainLayout>
     </>
