@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import NavItem from "./NavItem";
 import BoardsData from "data";
@@ -8,17 +8,19 @@ import { setSelectedBoard } from "redux/reducers/boardSlice";
 function SideNav({ handleAddBoardModal }) {
   const dispatch = useDispatch();
   const boards = useSelector((state) => state.board.board);
+  const selectedBoard = useSelector((state) => state.board.selectedBoard);
 
   const [selectedIndex, setSelectedIndex] = useState(0);
-
-  const handleSelect = (index) => {
-    setSelectedIndex(index);
-  };
 
   const handleSelectBoard = (board, index) => {
     setSelectedIndex(index);
     dispatch(setSelectedBoard(board));
   };
+
+  useEffect(() => {
+    const index = boards.findIndex((board) => board._id === selectedBoard._id);
+    setSelectedIndex(index);
+  }, [setSelectedIndex, boards, selectedBoard?._id]);
 
   return (
     <div className="absolute inset-y-0 left-0 -translate-x-full transition duration-200 ease-in-out shadow-sm pr-5 border border-gray-50 w-[300px]  bg-white  md:relative md:translate-x-0">

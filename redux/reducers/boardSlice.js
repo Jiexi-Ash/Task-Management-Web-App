@@ -65,6 +65,21 @@ export const updateTask = createAsyncThunk(
   }
 );
 
+export const deleteBoard = createAsyncThunk(
+  "board/deleteBoard",
+  async (boardID, { dispatch }) => {
+    try {
+      console.log("deleteBoard", boardID);
+      const boardData = await axios.delete(`/api/boards/delete/${boardID}`);
+
+      console.log(boardData.data);
+      return boardData.data;
+    } catch (err) {
+      console.log(err);
+    }
+  }
+);
+
 const boardSlice = createSlice({
   name: "board",
   initialState,
@@ -123,6 +138,17 @@ const boardSlice = createSlice({
       state.selectedBoard = action.payload;
     },
     [updateTask.rejected]: (state, action) => {},
+    [deleteBoard.pending]: (state, action) => {
+      state.loading = true;
+    },
+    [deleteBoard.fulfilled]: (state, action) => {
+      state.loading = false;
+      state.board = state.board.filter(
+        (board) => board._id !== action.payload._id
+      );
+      // set the selected board to the first board in the array
+      state.selectedBoard = state.board[0];
+    },
   },
 });
 

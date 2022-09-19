@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import Modal from "react-modal";
-import { useSelector } from "react-redux";
-
+import { useSelector, useDispatch } from "react-redux";
+import { deleteBoard } from "redux/reducers/boardSlice";
 Modal.setAppElement("#react-modal");
 
 const customStyles = {
@@ -21,7 +21,17 @@ const customStyles = {
 };
 
 function DeleteBoard({ isDelete = false, handleDelete }) {
+  const dispatch = useDispatch();
   const selectedBoard = useSelector((state) => state.board.selectedBoard);
+
+  const handleDeleteBoard = async () => {
+    dispatch(deleteBoard(selectedBoard._id))
+      .unwrap()
+      .then(() => {
+        handleDelete(false);
+      });
+  };
+
   return (
     <Modal
       isOpen={isDelete}
@@ -39,7 +49,12 @@ function DeleteBoard({ isDelete = false, handleDelete }) {
           </p>
         </div>
         <div className="flex flex-col space-y-5 pt-6 lg:flex-row lg:justify-between lg:items-center lg:space-x-4 lg:space-y-0">
-          <button className="btn bg-primaryRed w-full ">Delete</button>
+          <button
+            className="btn bg-primaryRed w-full "
+            onClick={handleDeleteBoard}
+          >
+            Delete
+          </button>
           <button className="btn text-primaryPurple  bg-primaryPurple/10 w-full ">
             Cancel
           </button>
